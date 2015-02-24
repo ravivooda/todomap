@@ -6,13 +6,15 @@
 //  Copyright (c) 2015 Ravi Vooda. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "TDMainViewController.h"
 
-@interface ViewController ()
+@interface TDMainViewController ()
+@property (weak, nonatomic) IBOutlet MKMapView *mapView;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
-@implementation ViewController
+@implementation TDMainViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
