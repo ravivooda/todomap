@@ -20,4 +20,11 @@
     // Configure the view for the selected state
 }
 
+-(void) setToDoItem:(TDObject *)toDoItem {
+    @synchronized(self) {
+        _toDoItem = toDoItem;
+        [self.textLabel setText:_toDoItem.title];
+    }
+}
+
 @end

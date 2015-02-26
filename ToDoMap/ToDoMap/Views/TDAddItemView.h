@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TDAddItemView : UIView
+@interface TDAddItemView : UIView <UITextViewDelegate, UITableViewDataSource, UITableViewDelegate>
+
+@property (strong, nonatomic, readonly) UITextView *inputTextView;
+@property (strong, nonatomic, readonly) UITableView *suggestionsTableView;
 
 @end

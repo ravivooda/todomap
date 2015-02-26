@@ -10,4 +10,12 @@
 
 @implementation TDObject
 
+-(void) setState:(TDObjectProgessState *)state {
+    @synchronized(self) {
+        _state = state;
+        
+#warning Send a notification from here for reloading
+    }
+}
+
 @end

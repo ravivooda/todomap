@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TDObject.h"
 
 @interface TDItemTableViewCell : UITableViewCell
+
+@property (strong, nonatomic) TDObject *toDoItem;
 
 @end

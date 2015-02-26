@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 
-@interface TDMainViewController : UIViewController
+@interface TDMainViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, MKMapViewDelegate>
+
 
 
 @end

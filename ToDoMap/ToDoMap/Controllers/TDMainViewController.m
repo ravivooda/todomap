@@ -7,10 +7,17 @@
 //
 
 #import "TDMainViewController.h"
+#import "TDUserToDoItemManager.h"
+#import "TDItemTableViewCell.h"
+#import "TDAddItemView.h"
 
 @interface TDMainViewController ()
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+@property (strong, nonatomic) NSArray *displayToDoItemsArray;
+
+@property (strong, nonatomic) TDAddItemView 
 
 @end
 
@@ -24,6 +31,56 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void) reloadToDos {
+    // Mapview Reload
+    id userLocation = [_mapView userLocation];
+    NSMutableArray *mapAnnotations = [[NSMutableArray alloc] initWithArray:[_mapView annotations]];
+    if (userLocation) {
+        [mapAnnotations removeObject:userLocation];
+    }
+    [_mapView removeAnnotations:mapAnnotations];
+    
+    
+    // TableView Reload
+    _displayToDoItemsArray = [[TDUserToDoItemManager defaultManager] toDoItems];
+    [_tableView reloadData];
+}
+
+-(void) addItemHandler {
+    
+}
+
+#pragma mark - Table View Delegate Methods
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return _displayToDoItemsArray.count + 1;
+}
+
+-(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row < _displayToDoItemsArray.count) {
+        static NSString *cellIdentifier = @"todoItemTableViewCellIdentifier";
+        TDItemTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+        if (!cell) {
+            cell = [[TDItemTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        }
+        cell.toDoItem = _displayToDoItemsArray[indexPath.row];
+        return cell;
+    } else {
+        static NSString *cellIdentifier = @"todoItemAddCellIdentifier";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+        if (!cell) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        }
+        return cell;
+    }
+}
+
+#pragma mark - Table View Delegate Methods
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == _displayToDoItemsArray.count) {
+        [self addItemHandler];
+    }
 }
 
 @end

@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		8D4F31EF4D6C34C649DDB915 /* libPods-ToDoMap.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E0129FF6693D05D335FCB0DA /* libPods-ToDoMap.a */; };
+		976A20571A9E158100F3C014 /* TDItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 976A20561A9E158100F3C014 /* TDItemTableViewCell.m */; };
+		976A205A1A9E1AA700F3C014 /* TDAddItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 976A20591A9E1AA700F3C014 /* TDAddItemView.m */; };
+		9770FEE01A9E261C007584AD /* TDSuggestionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9770FEDF1A9E261C007584AD /* TDSuggestionTableViewCell.m */; };
 		9772526F1A9CE36D00B6A7A8 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9772526E1A9CE36D00B6A7A8 /* MapKit.framework */; };
 		977252751A9CE3BA00B6A7A8 /* TDMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 977252721A9CE3BA00B6A7A8 /* TDMainViewController.m */; };
 		977252781A9CE4DB00B6A7A8 /* TDObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 977252771A9CE4DB00B6A7A8 /* TDObject.m */; };
@@ -32,6 +35,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		976A20551A9E158100F3C014 /* TDItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDItemTableViewCell.h; sourceTree = "<group>"; };
+		976A20561A9E158100F3C014 /* TDItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDItemTableViewCell.m; sourceTree = "<group>"; };
+		976A20581A9E1AA700F3C014 /* TDAddItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDAddItemView.h; sourceTree = "<group>"; };
+		976A20591A9E1AA700F3C014 /* TDAddItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDAddItemView.m; sourceTree = "<group>"; };
+		9770FEDE1A9E261C007584AD /* TDSuggestionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDSuggestionTableViewCell.h; sourceTree = "<group>"; };
+		9770FEDF1A9E261C007584AD /* TDSuggestionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDSuggestionTableViewCell.m; sourceTree = "<group>"; };
 		9772526E1A9CE36D00B6A7A8 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		977252711A9CE3BA00B6A7A8 /* TDMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDMainViewController.h; sourceTree = "<group>"; };
 		977252721A9CE3BA00B6A7A8 /* TDMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDMainViewController.m; sourceTree = "<group>"; };
@@ -117,6 +126,12 @@
 		977252741A9CE3BA00B6A7A8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				976A20551A9E158100F3C014 /* TDItemTableViewCell.h */,
+				976A20561A9E158100F3C014 /* TDItemTableViewCell.m */,
+				976A20581A9E1AA700F3C014 /* TDAddItemView.h */,
+				976A20591A9E1AA700F3C014 /* TDAddItemView.m */,
+				9770FEDE1A9E261C007584AD /* TDSuggestionTableViewCell.h */,
+				9770FEDF1A9E261C007584AD /* TDSuggestionTableViewCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -205,6 +220,7 @@
 				97DDA3A71A97974900ACA0F0 /* Frameworks */,
 				97DDA3A81A97974900ACA0F0 /* Resources */,
 				DDEAA63DB2D724CC70EB7674 /* Copy Pods Resources */,
+				976A205B1A9E1FF400F3C014 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -306,6 +322,19 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		976A205B1A9E1FF400F3C014 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "storyboardlint \"$SRCROOT\"";
+		};
 		DDEAA63DB2D724CC70EB7674 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -328,7 +357,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				976A20571A9E158100F3C014 /* TDItemTableViewCell.m in Sources */,
+				9770FEE01A9E261C007584AD /* TDSuggestionTableViewCell.m in Sources */,
 				977252781A9CE4DB00B6A7A8 /* TDObject.m in Sources */,
+				976A205A1A9E1AA700F3C014 /* TDAddItemView.m in Sources */,
 				9772527E1A9CE69400B6A7A8 /* TDUserToDoItemManager.m in Sources */,
 				97DDA3B31A97974900ACA0F0 /* AppDelegate.m in Sources */,
 				977252751A9CE3BA00B6A7A8 /* TDMainViewController.m in Sources */,

@@ -11,8 +11,10 @@
 
 @interface TDUserToDoItemManager : NSObject
 
-@property (strong, nonatomic, readonly) NSArray *toDoItems;
+@property (strong, nonatomic) NSMutableArray *toDoItems;
 
 -(void) addToDoItem:(TDObject*)object;
+
++(instancetype) defaultManager;
 
 @end

@@ -9,5 +9,18 @@
 #import "TDUserToDoItemManager.h"
 
 @implementation TDUserToDoItemManager
+static TDUserToDoItemManager *defManager;
+
++(instancetype) defaultManager {
+    if (!defManager) {
+        defManager = [[TDUserToDoItemManager alloc] init];
+        defManager.toDoItems = [[NSMutableArray alloc] init];
+    }
+    return defManager;
+}
+
+-(void) addToDoItem:(TDObject *)object {
+    [self.toDoItems addObject:object];
+}
 
 @end
