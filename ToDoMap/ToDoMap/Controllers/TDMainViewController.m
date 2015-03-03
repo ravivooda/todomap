@@ -17,7 +17,7 @@
 
 @property (strong, nonatomic) NSArray *displayToDoItemsArray;
 
-@property (strong, nonatomic) TDAddItemView 
+@property (strong, nonatomic) TDAddItemView *addItemView;
 
 @end
 
@@ -26,6 +26,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    _addItemView = [[TDAddItemView alloc] init];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -49,7 +51,11 @@
 }
 
 -(void) addItemHandler {
+    [_addItemView flush];
+    [_addItemView setFrame:CGRectMake(0, 0, self.view.frame.size.width, _addItemView.frame.size.height)];
+    [self.view addSubview:_addItemView];
     
+    [_addItemView becomeFirstResponder];
 }
 
 #pragma mark - Table View Delegate Methods
@@ -72,6 +78,7 @@
         if (!cell) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         }
+        [cell.textLabel setText:@"Add"];
         return cell;
     }
 }

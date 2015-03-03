@@ -8,10 +8,13 @@ pod "Mapbox-iOS-SDK"
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '7.0'
 pod 'AFNetworking', '~> 2.5'
+pod "Realm"
 
 end
 
 target 'ToDoMapTests' do
+
+pod "Realm/Headers"
 
 end
 

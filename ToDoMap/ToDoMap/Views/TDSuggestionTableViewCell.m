@@ -20,4 +20,11 @@
     // Configure the view for the selected state
 }
 
+-(void) setLocation:(TDLocation *)location {
+    @synchronized(self) {
+        _location = location;
+        [self.textLabel setText:location.name];
+    }
+}
+
 @end

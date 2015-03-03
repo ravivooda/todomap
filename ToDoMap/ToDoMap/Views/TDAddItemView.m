@@ -9,8 +9,9 @@
 #import "TDAddItemView.h"
 #import "TDSuggestionTableViewCell.h"
 #import <AFNetworking.h>
+#import "TDLocation.h"
 
-#define googleAPIKey @"AIzaSyA9f8kJ-B4_qP2ik6TqsZN7TGpU_Giw6UU"
+#define googleAPIKey @"AIzaSyBx5XW_Jr0lx0dON3WBOLJ9TDbn8zDC1W8"
 
 #define textViewHeight 50
 #define tableViewMaxHeight 150
@@ -38,9 +39,14 @@
         _suggestionsTableView = [[UITableView alloc] init];
         
         [_inputTextView setDelegate:self];
-        
+        [_suggestionsTableView setDataSource:self];
+        [_suggestionsTableView setDelegate:self];
+
         [self addSubview:_inputTextView];
-        [self addSubview:_suggestionsTableView];
+        
+        [_inputTextView setInputAccessoryView:_suggestionsTableView];
+        
+        [_inputTextView setAutocorrectionType:UITextAutocorrectionTypeNo];
         
         _suggestionItems = [[NSMutableArray alloc] init];
     }
@@ -53,7 +59,7 @@
     }
     [super setFrame:frame];
     [_inputTextView setFrame:CGRectMake(0, 0, frame.size.width, textViewHeight)];
-    [_suggestionsTableView setFrame:CGRectMake(0, textViewHeight, frame.size.width, frame.size.height - textViewHeight)];
+    [_suggestionsTableView setFrame:CGRectMake(0, textViewHeight, frame.size.width, textViewHeight)];
 }
 
 #pragma mark - Text View Delegate Methods
@@ -68,29 +74,71 @@
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellIdentifier = @"suggestionCellIdentifier";
-    TDSuggestionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+    TDSuggestionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (!cell) {
         cell = [[TDSuggestionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
-    [cell.textLabel setText:[NSString stringWithFormat:@"Suggestion: %ld",(long)indexPath.row]];
+    TDLocation *cellObject = [_suggestionItems objectAtIndex:indexPath.row];
+    [cell setLocation:cellObject];
     return cell;
 }
 
 #pragma mark - Table View Delegate Methods
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-}
-
-#pragma mark - Fetching suggestions Methods
--(void) fetchPlaceSuggestionsForString:(NSString*)string {
-    NSString *url = @"https://maps.googleapis.com/maps/api/place/autocomplete/json?parameters";
-    NSDictionary *parameters = @{@"input":string , @"key":googleAPIKey};
+    NSString *googlePlaceID = [(TDLocation*)[_suggestionItems objectAtIndex:indexPath.row] googlePlaceID];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    NSString *url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/details/json?placeid=%@&key=%@",googlePlaceID, googleAPIKey];
+    [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog([responseObject description]);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
     }];
+}
+
+#pragma mark - Fetching suggestions Methods
+-(void) fetchPlaceSuggestionsForString:(NSString*)string {
+    NSString *url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/autocomplete/json?key=%@",googleAPIKey];
+    NSDictionary *parameters = @{@"input":string , @"key":googleAPIKey};
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        _suggestionItems = [[NSMutableArray alloc] init];
+        if ([[responseObject objectForKey:@"status"] isEqualToString:@"OK"]) {
+            for (NSDictionary *placeDictionary in [responseObject objectForKey:@"predictions"]) {
+                TDLocation *location = [[TDLocation alloc] initWithGoogleResponse:placeDictionary];
+                [_suggestionItems addObject:location];
+            }
+            [_suggestionsTableView reloadData];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
+}
+
+#pragma mark - Key Input Protocol Methods
+-(BOOL) hasText {
+    return ![_inputTextView.text isEqualToString:@""];
+}
+
+-(void) insertText:(NSString *)text {
+    [_inputTextView insertText:text];
+    
+}
+
+-(void) deleteBackward {
+    [_inputTextView deleteBackward];
+}
+
+#pragma mark - Rest Methods
+-(void) flush {
+    [_inputTextView setText:@""];
+    _suggestionItems = [[NSMutableArray alloc] init];
+    
+    [_suggestionsTableView reloadData];
+}
+
+-(BOOL) canBecomeFirstResponder {
+    [_inputTextView becomeFirstResponder];
+    return false;
 }
 
 @end

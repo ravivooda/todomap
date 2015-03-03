@@ -7,7 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
 
 @interface TDLocation : NSObject
+
+@property (strong, nonatomic) NSString *name;
+@property (strong, nonatomic) CLLocation *coordinates;
+@property (strong, nonatomic) NSString *googlePlaceID;
+
+-(instancetype) initWithGoogleResponse:(NSDictionary*)response;
+
+-(void) fetchLocation;
 
 @end

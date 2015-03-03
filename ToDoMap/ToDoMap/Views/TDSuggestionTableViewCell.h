@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TDLocation.h"
 
 @interface TDSuggestionTableViewCell : UITableViewCell
+
+@property (strong, nonatomic) TDLocation *location;
 
 @end
