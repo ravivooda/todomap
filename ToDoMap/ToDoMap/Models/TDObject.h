@@ -6,21 +6,18 @@
 //  Copyright (c) 2015 Ravi Vooda. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <CoreLocation/CoreLocation.h>
+#import <Realm.h>
 
-typedef enum {
-    TDObjectCreated,
-    TDObjectInProgress,
-    TDObjectCompleted,
-    TDObjectDeleted
-} TDObjectProgessState;
+@class TDLocation;
 
-@interface TDObject : NSObject
+@interface TDObject : RLMObject
 
-@property (strong, nonatomic) NSString *title;
-@property (strong, nonatomic) NSDate *createdTime;
-@property (nonatomic) TDObjectProgessState *state;
-@property (strong, nonatomic) CLLocation *coordinates;
+@property NSString *title;
+@property NSDate *createdTime;
+@property TDLocation *coordinates;
 
 @end
+
+// This protocol enables typed collections. i.e.:
+// RLMArray<TDObjectClas>
+RLM_ARRAY_TYPE(TDObject)

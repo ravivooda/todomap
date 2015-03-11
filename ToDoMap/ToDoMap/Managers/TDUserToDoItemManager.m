@@ -23,4 +23,10 @@ static TDUserToDoItemManager *defManager;
     [self.toDoItems addObject:object];
 }
 
+-(void) backgroundSync {
+    @synchronized(self){
+        
+    }
+}
+
 @end

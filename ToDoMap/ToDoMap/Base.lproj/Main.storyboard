@@ -67,5 +67,49 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="ZQ3-Ur-yOb">
+            <objects>
+                <viewController id="DmU-mo-A4D" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dtG-2W-aa5"/>
+                        <viewControllerLayoutGuide type="bottom" id="Kre-vb-Qez"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="782-2x-duB">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="M6p-Mh-DbA">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="DmU-mo-A4D" id="bRV-ta-UND"/>
+                                </connections>
+                            </searchBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="M6p-Mh-DbA" firstAttribute="leading" secondItem="782-2x-duB" secondAttribute="leading" id="8jX-DV-oYW"/>
+                            <constraint firstItem="M6p-Mh-DbA" firstAttribute="top" secondItem="782-2x-duB" secondAttribute="top" id="FzK-aI-Vac"/>
+                            <constraint firstAttribute="trailing" secondItem="M6p-Mh-DbA" secondAttribute="trailing" id="zFz-nl-Rh2"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="w7X-co-KqD" id="uGR-P1-glK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WUU-1E-mNV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="w7X-co-KqD">
+                    <connections>
+                        <outlet property="delegate" destination="DmU-mo-A4D" id="hB1-0b-2IC"/>
+                        <outlet property="searchBar" destination="M6p-Mh-DbA" id="CeM-oZ-fGA"/>
+                        <outlet property="searchContentsController" destination="DmU-mo-A4D" id="bUJ-ZE-RhS"/>
+                        <outlet property="searchResultsDataSource" destination="DmU-mo-A4D" id="SqY-qC-NpY"/>
+                        <outlet property="searchResultsDelegate" destination="DmU-mo-A4D" id="R6B-s8-ChT"/>
+                    </connections>
+                </searchDisplayController>
+            </objects>
+            <point key="canvasLocation" x="1456" y="282"/>
+        </scene>
     </scenes>
 </document>

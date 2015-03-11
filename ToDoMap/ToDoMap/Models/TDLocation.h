@@ -6,10 +6,10 @@
 //  Copyright (c) 2015 Ravi Vooda. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <Realm.h>
 #import <CoreLocation/CoreLocation.h>
 
-@interface TDLocation : NSObject
+@interface TDLocation : RLMObject
 
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) CLLocation *coordinates;
@@ -20,3 +20,7 @@
 -(void) fetchLocation;
 
 @end
+
+// This protocol enables typed collections. i.e.:
+// RLMArray<TDObjectClas>
+RLM_ARRAY_TYPE(TDLocation)
