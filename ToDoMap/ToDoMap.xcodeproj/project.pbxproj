@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		8D4F31EF4D6C34C649DDB915 /* libPods-ToDoMap.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E0129FF6693D05D335FCB0DA /* libPods-ToDoMap.a */; };
 		94B0CC9ED09D785E81658826 /* libPods-ToDoMapTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE464640FD3BA0ABC23AB00 /* libPods-ToDoMapTests.a */; };
-		9720C3441AA587BD001B320A /* TDAddObjectProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 9720C3431AA587BD001B320A /* TDAddObjectProtocol.m */; };
 		9720C3471AA589BE001B320A /* TDSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9720C3461AA589BE001B320A /* TDSearchViewController.m */; };
 		976A20571A9E158100F3C014 /* TDItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 976A20561A9E158100F3C014 /* TDItemTableViewCell.m */; };
 		976A205A1A9E1AA700F3C014 /* TDAddItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 976A20591A9E1AA700F3C014 /* TDAddItemView.m */; };
@@ -41,8 +40,6 @@
 /* Begin PBXFileReference section */
 		4A7477A3E428EA4BEA3AB6EF /* Pods-ToDoMapTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToDoMapTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ToDoMapTests/Pods-ToDoMapTests.release.xcconfig"; sourceTree = "<group>"; };
 		8BE464640FD3BA0ABC23AB00 /* libPods-ToDoMapTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ToDoMapTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		9720C3421AA587BD001B320A /* TDAddObjectProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDAddObjectProtocol.h; sourceTree = "<group>"; };
-		9720C3431AA587BD001B320A /* TDAddObjectProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDAddObjectProtocol.m; sourceTree = "<group>"; };
 		9720C3451AA589BE001B320A /* TDSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDSearchViewController.h; sourceTree = "<group>"; };
 		9720C3461AA589BE001B320A /* TDSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDSearchViewController.m; sourceTree = "<group>"; };
 		976A20551A9E158100F3C014 /* TDItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDItemTableViewCell.h; sourceTree = "<group>"; };
@@ -72,6 +69,7 @@
 		97DDA3C31A97974A00ACA0F0 /* ToDoMapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToDoMapTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		97DDA3C81A97974A00ACA0F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		97DDA3C91A97974A00ACA0F0 /* ToDoMapTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ToDoMapTests.m; sourceTree = "<group>"; };
+		97EEBE9B1AAFFAA300443239 /* TDAddObjectDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDAddObjectDelegate.h; sourceTree = "<group>"; };
 		9BEEB0FF6D923957C0989D3D /* Pods-ToDoMapTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToDoMapTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ToDoMapTests/Pods-ToDoMapTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DA5A716E6CBE20ECC8BF8C97 /* Pods-ToDoMap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToDoMap.release.xcconfig"; path = "Pods/Target Support Files/Pods-ToDoMap/Pods-ToDoMap.release.xcconfig"; sourceTree = "<group>"; };
 		E0129FF6693D05D335FCB0DA /* libPods-ToDoMap.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ToDoMap.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -125,8 +123,7 @@
 		9720C3411AA5878D001B320A /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				9720C3421AA587BD001B320A /* TDAddObjectProtocol.h */,
-				9720C3431AA587BD001B320A /* TDAddObjectProtocol.m */,
+				97EEBE9B1AAFFAA300443239 /* TDAddObjectDelegate.h */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -422,7 +419,6 @@
 			files = (
 				976A20571A9E158100F3C014 /* TDItemTableViewCell.m in Sources */,
 				9770FEE01A9E261C007584AD /* TDSuggestionTableViewCell.m in Sources */,
-				9720C3441AA587BD001B320A /* TDAddObjectProtocol.m in Sources */,
 				977252781A9CE4DB00B6A7A8 /* TDObject.m in Sources */,
 				976A205A1A9E1AA700F3C014 /* TDAddItemView.m in Sources */,
 				9770FEE31A9F74C2007584AD /* TDLocation.m in Sources */,

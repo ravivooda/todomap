@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
+#import "TDAddObjectDelegate.h"
 
-@interface TDMainViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, MKMapViewDelegate>
+@interface TDMainViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, MKMapViewDelegate, TDAddObjectDelegate>
 
 
 

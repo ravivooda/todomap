@@ -67,10 +67,20 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
-        <!--View Controller-->
+        <!--Search View Controller-->
         <scene sceneID="ZQ3-Ur-yOb">
             <objects>
-                <viewController id="DmU-mo-A4D" sceneMemberID="viewController">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WUU-1E-mNV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="w7X-co-KqD">
+                    <connections>
+                        <outlet property="delegate" destination="DmU-mo-A4D" id="hB1-0b-2IC"/>
+                        <outlet property="searchBar" destination="M6p-Mh-DbA" id="CeM-oZ-fGA"/>
+                        <outlet property="searchContentsController" destination="DmU-mo-A4D" id="bUJ-ZE-RhS"/>
+                        <outlet property="searchResultsDataSource" destination="DmU-mo-A4D" id="SqY-qC-NpY"/>
+                        <outlet property="searchResultsDelegate" destination="DmU-mo-A4D" id="R6B-s8-ChT"/>
+                    </connections>
+                </searchDisplayController>
+                <viewController id="DmU-mo-A4D" customClass="TDSearchViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dtG-2W-aa5"/>
                         <viewControllerLayoutGuide type="bottom" id="Kre-vb-Qez"/>
@@ -94,22 +104,29 @@
                             <constraint firstAttribute="trailing" secondItem="M6p-Mh-DbA" secondAttribute="trailing" id="zFz-nl-Rh2"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="ERM-2c-pbf"/>
                     <connections>
                         <outlet property="searchDisplayController" destination="w7X-co-KqD" id="uGR-P1-glK"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="WUU-1E-mNV" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <searchDisplayController id="w7X-co-KqD">
-                    <connections>
-                        <outlet property="delegate" destination="DmU-mo-A4D" id="hB1-0b-2IC"/>
-                        <outlet property="searchBar" destination="M6p-Mh-DbA" id="CeM-oZ-fGA"/>
-                        <outlet property="searchContentsController" destination="DmU-mo-A4D" id="bUJ-ZE-RhS"/>
-                        <outlet property="searchResultsDataSource" destination="DmU-mo-A4D" id="SqY-qC-NpY"/>
-                        <outlet property="searchResultsDelegate" destination="DmU-mo-A4D" id="R6B-s8-ChT"/>
-                    </connections>
-                </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="1456" y="282"/>
+            <point key="canvasLocation" x="1970" y="272"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="RRe-tp-Ee3">
+            <objects>
+                <navigationController storyboardIdentifier="locationSearchViewController" id="ywP-6e-SVd" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="8hQ-0L-ogD">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="DmU-mo-A4D" kind="relationship" relationship="rootViewController" id="HmM-af-XxU"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EHB-tK-Qql" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1308" y="272"/>
         </scene>
     </scenes>
 </document>

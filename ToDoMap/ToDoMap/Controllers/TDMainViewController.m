@@ -10,6 +10,7 @@
 #import "TDUserToDoItemManager.h"
 #import "TDItemTableViewCell.h"
 #import "TDAddItemView.h"
+#import "TDSearchViewController.h"
 
 @interface TDMainViewController ()
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
@@ -51,11 +52,16 @@
 }
 
 -(void) addItemHandler {
-    [_addItemView flush];
+    /*[_addItemView flush];
     [_addItemView setFrame:CGRectMake(0, 0, self.view.frame.size.width, _addItemView.frame.size.height)];
     [self.view addSubview:_addItemView];
     
-    [_addItemView becomeFirstResponder];
+    [_addItemView becomeFirstResponder];*/
+    static NSString *searchControllerIdentifier = @"locationSearchViewController";
+    UINavigationController *navigationController = [self.storyboard instantiateViewControllerWithIdentifier:searchControllerIdentifier];
+    TDSearchViewController *locationSearchViewController = (TDSearchViewController*)[navigationController topViewController];
+    locationSearchViewController.delegate = self;
+    [self presentViewController:locationSearchViewController animated:YES completion:nil];
 }
 
 #pragma mark - Table View Delegate Methods

@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TDAddObjectProtocol.h"
+#import "TDAddObjectDelegate.h"
 
 @interface TDSearchViewController : UIViewController
 
-@property (weak, nonatomic) TDAddObjectProtocol *delegate;
+@property (nonatomic, assign)   id <TDAddObjectDelegate>   delegate;
 
 @end
