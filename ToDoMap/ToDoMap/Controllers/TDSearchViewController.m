@@ -10,6 +10,8 @@
 #import <AFNetworking.h>
 #import "TDLocation.h"
 #import "TDSuggestionTableViewCell.h"
+#import "TDObject.h"
+#import "TDUserToDoItemManager.h"
 
 #define googleAPIKey @"AIzaSyBx5XW_Jr0lx0dON3WBOLJ9TDbn8zDC1W8"
 
@@ -17,6 +19,9 @@
 
 @property (strong, atomic) NSMutableArray *searchResults;
 @property (weak, nonatomic) IBOutlet UITableView *searchResultsTableView;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+
+@property (strong, atomic) TDObject *aNewItem;
 
 @end
 
@@ -25,6 +30,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    _aNewItem = [[TDObject alloc] init];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -54,7 +60,14 @@
 #pragma mark - Search Bar Delegate Methods
 -(void) searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     NSLog(@"Should fetch complete for the text: %@", searchText);
+    [_aNewItem setTitle:searchText];
+#warning Need to tokenize the string
     [self fetchPlaceSuggestionsForString:searchText];
+}
+
+-(void) searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    NSLog(@"Search Bar button clicked");
+    [[TDUserToDoItemManager defaultManager] addToDoItem:_aNewItem];
 }
 
 #pragma mark - Fetching suggestions Methods
@@ -90,6 +103,11 @@
     TDLocation *cellObject = [_searchResults objectAtIndex:indexPath.row];
     [cell setLocation:cellObject];
     return cell;
+}
+
+-(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Set the location for the item
+    [_aNewItem setCoordinates:[_searchResults objectAtIndex:indexPath.row]];
 }
 
 @end

@@ -107,6 +107,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="searchBar" destination="x7v-QJ-leL" id="WQB-5a-iWa"/>
                         <outlet property="searchResultsTableView" destination="eQs-fK-Hv5" id="Vqv-lH-S9e"/>
                     </connections>
                 </viewController>

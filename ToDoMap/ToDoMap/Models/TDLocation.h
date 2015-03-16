@@ -12,7 +12,8 @@
 @interface TDLocation : RLMObject
 
 @property (strong, nonatomic) NSString *name;
-@property (strong, nonatomic) CLLocation *coordinates;
+@property (nonatomic) NSString *latitude;
+@property (nonatomic) NSString *longitude;
 @property (strong, nonatomic) NSString *googlePlaceID;
 
 -(instancetype) initWithGoogleResponse:(NSDictionary*)response;
