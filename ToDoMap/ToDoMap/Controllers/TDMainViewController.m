@@ -58,9 +58,9 @@
     
     [_addItemView becomeFirstResponder];*/
     static NSString *searchControllerIdentifier = @"locationSearchViewController";
-    UINavigationController *navigationController = [self.storyboard instantiateViewControllerWithIdentifier:searchControllerIdentifier];
-    TDSearchViewController *locationSearchViewController = (TDSearchViewController*)[navigationController topViewController];
-    locationSearchViewController.delegate = self;
+//    UINavigationController *navigationController = [self.storyboard instantiateViewControllerWithIdentifier:searchControllerIdentifier];
+    TDSearchViewController *locationSearchViewController = [self.storyboard instantiateViewControllerWithIdentifier:searchControllerIdentifier];
+    locationSearchViewController.addDelegate = self;
     [self presentViewController:locationSearchViewController animated:YES completion:nil];
 }
 
@@ -94,6 +94,14 @@
     if (indexPath.row == _displayToDoItemsArray.count) {
         [self addItemHandler];
     }
+}
+
+-(void) refresh:(NSArray *)toDoItems {
+#warning Have to implement this
+}
+
+-(void) addToDoItem:(TDObject *)object {
+#warning Have to implement this
 }
 
 @end

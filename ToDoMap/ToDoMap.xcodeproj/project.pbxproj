@@ -25,6 +25,7 @@
 		97DDA3BB1A97974A00ACA0F0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97DDA3BA1A97974A00ACA0F0 /* Images.xcassets */; };
 		97DDA3BE1A97974A00ACA0F0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97DDA3BC1A97974A00ACA0F0 /* LaunchScreen.xib */; };
 		97DDA3CA1A97974A00ACA0F0 /* ToDoMapTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 97DDA3C91A97974A00ACA0F0 /* ToDoMapTests.m */; };
+		97EEBE9F1AB71F3000443239 /* TDUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EEBE9E1AB71F3000443239 /* TDUtils.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +71,8 @@
 		97DDA3C81A97974A00ACA0F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		97DDA3C91A97974A00ACA0F0 /* ToDoMapTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ToDoMapTests.m; sourceTree = "<group>"; };
 		97EEBE9B1AAFFAA300443239 /* TDAddObjectDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDAddObjectDelegate.h; sourceTree = "<group>"; };
+		97EEBE9D1AB71F3000443239 /* TDUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDUtils.h; sourceTree = "<group>"; };
+		97EEBE9E1AB71F3000443239 /* TDUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDUtils.m; sourceTree = "<group>"; };
 		9BEEB0FF6D923957C0989D3D /* Pods-ToDoMapTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToDoMapTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ToDoMapTests/Pods-ToDoMapTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DA5A716E6CBE20ECC8BF8C97 /* Pods-ToDoMap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToDoMap.release.xcconfig"; path = "Pods/Target Support Files/Pods-ToDoMap/Pods-ToDoMap.release.xcconfig"; sourceTree = "<group>"; };
 		E0129FF6693D05D335FCB0DA /* libPods-ToDoMap.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ToDoMap.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -195,6 +198,7 @@
 		97DDA3AC1A97974900ACA0F0 /* ToDoMap */ = {
 			isa = PBXGroup;
 			children = (
+				97EEBE9C1AB71F1000443239 /* Utils */,
 				9720C3411AA5878D001B320A /* Protocols */,
 				9772527B1A9CE66400B6A7A8 /* Managers */,
 				977252701A9CE3BA00B6A7A8 /* Controllers */,
@@ -234,6 +238,15 @@
 				97DDA3C81A97974A00ACA0F0 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		97EEBE9C1AB71F1000443239 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				97EEBE9D1AB71F3000443239 /* TDUtils.h */,
+				97EEBE9E1AB71F3000443239 /* TDUtils.m */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -427,6 +440,7 @@
 				977252751A9CE3BA00B6A7A8 /* TDMainViewController.m in Sources */,
 				9720C3471AA589BE001B320A /* TDSearchViewController.m in Sources */,
 				97DDA3B01A97974900ACA0F0 /* main.m in Sources */,
+				97EEBE9F1AB71F3000443239 /* TDUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

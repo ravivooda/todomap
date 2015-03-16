@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "TDAddObjectDelegate.h"
 
-@interface TDSearchViewController : UIViewController
+@interface TDSearchViewController : UIViewController <UISearchControllerDelegate, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, assign)   id <TDAddObjectDelegate>   delegate;
+@property (nonatomic, assign) id <TDAddObjectDelegate> addDelegate;
 
 @end
