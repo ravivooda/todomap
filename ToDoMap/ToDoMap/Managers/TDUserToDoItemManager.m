@@ -7,6 +7,7 @@
 //
 
 #import "TDUserToDoItemManager.h"
+#import <Realm/RLMRealm.h>
 
 @implementation TDUserToDoItemManager
 static TDUserToDoItemManager *defManager;
@@ -15,18 +16,32 @@ static TDUserToDoItemManager *defManager;
     if (!defManager) {
         defManager = [[TDUserToDoItemManager alloc] init];
         defManager.toDoItems = [[NSMutableArray alloc] init];
+        
+//        [defManager.toDoItems addObjectsFromArray:[[RLMRealm defaultRealm] allObjects]];
     }
     return defManager;
 }
 
 -(void) addToDoItem:(TDObject *)object {
     [self.toDoItems addObject:object];
+    @synchronized(self) {
+        RLMRealm *defRealm = [RLMRealm defaultRealm];
+        [defRealm beginWriteTransaction];
+        [defRealm addObject:object];
+        [defRealm commitWriteTransaction];
+    }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"itemsChanged" object:nil];
 }
 
 -(void) backgroundSync {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         @synchronized(self) {
-            
+            RLMRealm *defRealm = [RLMRealm defaultRealm];
+            [defRealm beginWriteTransaction];
+            [defRealm deleteAllObjects];
+            [defRealm addObjects:_toDoItems];
+            [defRealm commitWriteTransaction];
         }
     });
 }

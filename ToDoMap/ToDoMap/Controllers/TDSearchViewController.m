@@ -67,7 +67,9 @@
 
 -(void) searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     NSLog(@"Search Bar button clicked");
+    [_aNewItem setCreatedTime:[NSDate date]];
     [[TDUserToDoItemManager defaultManager] addToDoItem:_aNewItem];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - Fetching suggestions Methods

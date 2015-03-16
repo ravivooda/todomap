@@ -29,6 +29,8 @@
     // Do any additional setup after loading the view, typically from a nib.
     
     _addItemView = [[TDAddItemView alloc] init];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadToDos) name:@"itemsChanged" object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
