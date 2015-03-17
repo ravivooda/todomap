@@ -21,6 +21,8 @@
 @property (weak, nonatomic) IBOutlet UITableView *searchResultsTableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
+@property (nonatomic) BOOL isLocationSearching;
+
 @property (strong, atomic) TDObject *aNewItem;
 
 @end
@@ -31,6 +33,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     _aNewItem = [[TDObject alloc] init];
+    _isLocationSearching = false;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -61,8 +64,21 @@
 -(void) searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     NSLog(@"Should fetch complete for the text: %@", searchText);
     [_aNewItem setTitle:searchText];
-#warning Need to tokenize the string
-    [self fetchPlaceSuggestionsForString:searchText];
+    NSArray *componentItems = [searchText componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" "]];
+    if ([componentItems count] > 0) {
+        NSString *lastItem = [componentItems objectAtIndex:componentItems.count - 1];
+        if (![lastItem isEqualToString:@""] && [[lastItem substringToIndex:1] isEqualToString:@"#"]) {
+            [self fetchPlaceSuggestionsForString:[lastItem substringFromIndex:1]];
+            if (!_isLocationSearching) {
+                _isLocationSearching = true;
+                [self.searchResultsTableView reloadData];
+            }
+        } else {
+            _searchResults = [[NSMutableArray alloc] init];
+            [self.searchResultsTableView reloadData];
+            _isLocationSearching = false;
+        }
+    }
 }
 
 -(void) searchBarSearchButtonClicked:(UISearchBar *)searchBar {
@@ -93,6 +109,9 @@
 
 #pragma mark - Table View Data Source Methods
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (!_isLocationSearching) {
+        return 0;
+    }
     return _searchResults.count;
 }
 
@@ -110,6 +129,14 @@
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Set the location for the item
     [_aNewItem setCoordinates:[_searchResults objectAtIndex:indexPath.row]];
+    _isLocationSearching = false;
+    [self.searchResultsTableView reloadData];
+    
+    NSString *title = _searchBar.text;
+    int point = (int)[title rangeOfString:@"#"].location;
+    NSString *completedTitle = [[title substringToIndex:point] stringByAppendingString:[(TDLocation*)[_searchResults objectAtIndex:indexPath.row] name]];
+    [_searchBar setText:completedTitle];
+    [_aNewItem setTitle:completedTitle];
 }
 
 @end

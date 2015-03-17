@@ -17,7 +17,9 @@ static TDUserToDoItemManager *defManager;
         defManager = [[TDUserToDoItemManager alloc] init];
         defManager.toDoItems = [[NSMutableArray alloc] init];
         
-//        [defManager.toDoItems addObjectsFromArray:[[RLMRealm defaultRealm] allObjects]];
+        for (TDObject *savedObject in [TDObject allObjectsInRealm:[RLMRealm defaultRealm]]) {
+            [defManager.toDoItems addObject:savedObject];
+        }
     }
     return defManager;
 }

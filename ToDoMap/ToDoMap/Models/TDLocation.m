@@ -19,6 +19,11 @@
 
 @implementation TDLocation
 
++ (NSDictionary *)defaultPropertyValues
+{
+    return @{@"latitude" : @"" , @"longitude" : @""};
+}
+
 -(instancetype) initWithGoogleResponse:(NSDictionary *)response {
     self = [super init];
     if (self) {
