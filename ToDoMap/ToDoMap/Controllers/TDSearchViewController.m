@@ -128,15 +128,21 @@
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Set the location for the item
-    [_aNewItem setCoordinates:[_searchResults objectAtIndex:indexPath.row]];
-    _isLocationSearching = false;
-    [self.searchResultsTableView reloadData];
-    
-    NSString *title = _searchBar.text;
-    int point = (int)[title rangeOfString:@"#"].location;
-    NSString *completedTitle = [[title substringToIndex:point] stringByAppendingString:[(TDLocation*)[_searchResults objectAtIndex:indexPath.row] name]];
-    [_searchBar setText:completedTitle];
-    [_aNewItem setTitle:completedTitle];
+    TDLocation *locationSelected = [_searchResults objectAtIndex:indexPath.row];
+    [locationSelected fetchLocation:^{
+        [_aNewItem setCoordinates:locationSelected];
+        _isLocationSearching = false;
+        [self.searchResultsTableView reloadData];
+        
+        NSString *title = _searchBar.text;
+        int point = (int)[title rangeOfString:@"#"].location;
+        NSString *completedTitle = [[title substringToIndex:point] stringByAppendingString:[locationSelected name]];
+        [_searchBar setText:completedTitle];
+        [_aNewItem setTitle:completedTitle];
+    } errorBlock:^(NSError *error) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"To Do Map" message:@"Error occurred in fetching location details" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+        [alert show];
+    }];
 }
 
 @end

@@ -18,7 +18,7 @@
 
 -(instancetype) initWithGoogleResponse:(NSDictionary*)response;
 
--(void) fetchLocation;
+-(void) fetchLocation:(void (^)())completedBlock errorBlock:(void (^)(NSError *error))errorBlock;
 
 @end
 

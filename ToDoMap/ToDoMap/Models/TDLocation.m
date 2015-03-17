@@ -35,13 +35,16 @@
     return self;
 }
 
--(void) fetchLocation {
+-(void) fetchLocation:(void (^)())completedBlock errorBlock:(void (^)(NSError *))errorBlock {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSString *url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/details/json?placeid=%@&key=%@",_googlePlaceID, googleAPIKey];
     [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog([responseObject description]);
+        NSDictionary *geometry = [[[responseObject objectForKey:@"result"] objectForKey:@"geometry"] objectForKey:@"location"];
+        _latitude = [NSString stringWithFormat:@"%@", [geometry objectForKey:@"lat"]];
+        _longitude = [NSString stringWithFormat:@"%@", [geometry objectForKey:@"lng"]];
+        completedBlock();
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
+        errorBlock(error);
     }];
 }
 
