@@ -11,6 +11,7 @@
 #import "TDItemTableViewCell.h"
 #import "TDAddItemView.h"
 #import "TDSearchViewController.h"
+#import "TDLocation.h"
 
 @interface TDMainViewController ()
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
@@ -40,6 +41,9 @@
 }
 
 -(void) reloadToDos {
+    // Reload Data
+    _displayToDoItemsArray = [[TDUserToDoItemManager defaultManager] toDoItems];
+    
     // Mapview Reload
     id userLocation = [_mapView userLocation];
     NSMutableArray *mapAnnotations = [[NSMutableArray alloc] initWithArray:[_mapView annotations]];
@@ -48,9 +52,16 @@
     }
     [_mapView removeAnnotations:mapAnnotations];
     
+    for (TDObject *toDoObject in _displayToDoItemsArray) {
+        if (![toDoObject.coordinates.latitude isEqualToString:@""]) {
+            MKPointAnnotation *toDoAnnotation = [[MKPointAnnotation alloc] init];
+            toDoAnnotation.coordinate = CLLocationCoordinate2DMake([toDoObject.coordinates.latitude floatValue], [toDoObject.coordinates.longitude floatValue]);
+            [_mapView addAnnotation:toDoAnnotation];
+        }
+    }
+    
     
     // TableView Reload
-    _displayToDoItemsArray = [[TDUserToDoItemManager defaultManager] toDoItems];
     [_tableView reloadData];
 }
 
