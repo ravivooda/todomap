@@ -17,4 +17,6 @@
 
 +(instancetype) defaultManager;
 
+-(void) moveItemFromPosition:(int)startPosition toPosition:(int)endPosition;
+
 @end

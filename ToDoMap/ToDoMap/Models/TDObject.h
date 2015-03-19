@@ -12,6 +12,7 @@
 
 @interface TDObject : RLMObject
 
+@property int position;
 @property NSString *title;
 @property NSDate *createdTime;
 @property TDLocation *coordinates;

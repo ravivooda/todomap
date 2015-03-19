@@ -25,6 +25,7 @@ static TDUserToDoItemManager *defManager;
 }
 
 -(void) addToDoItem:(TDObject *)object {
+    object.position = (int)_toDoItems.count;
     [self.toDoItems addObject:object];
     @synchronized(self) {
         RLMRealm *defRealm = [RLMRealm defaultRealm];
@@ -42,10 +43,20 @@ static TDUserToDoItemManager *defManager;
             RLMRealm *defRealm = [RLMRealm defaultRealm];
             [defRealm beginWriteTransaction];
             [defRealm deleteAllObjects];
+            [defRealm commitWriteTransaction];
+            [defRealm beginWriteTransaction];
             [defRealm addObjects:_toDoItems];
             [defRealm commitWriteTransaction];
         }
     });
+}
+
+-(void) moveItemFromPosition:(int)startPosition toPosition:(int)endPosition {
+    TDObject *object = [_toDoItems objectAtIndex:startPosition];
+    @synchronized(self) {
+        [_toDoItems removeObjectAtIndex:startPosition];
+        [_toDoItems insertObject:object atIndex:endPosition];
+    }
 }
 
 @end

@@ -103,6 +103,18 @@
     }
 }
 
+-(BOOL) tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == _displayToDoItemsArray.count - 1) {
+        return NO;
+    }
+    return YES;
+}
+
+-(void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
+    [[TDUserToDoItemManager defaultManager] moveItemFromPosition:(int)sourceIndexPath.row toPosition:(int)destinationIndexPath.row];
+    [self reloadToDos];
+}
+
 #pragma mark - Table View Delegate Methods
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == _displayToDoItemsArray.count) {
